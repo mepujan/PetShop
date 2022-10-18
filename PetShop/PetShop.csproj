@@ -168,6 +168,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Attributes\NoDigitsAttribute.cs" />
+    <Compile Include="Attributes\NonNegativeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -184,12 +186,37 @@
     <Compile Include="Migrations\202209280127153_Initial Migrations.designer.cs">
       <DependentUpon>202209280127153_Initial Migrations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210172104433_AgePropertyAdded.cs" />
+    <Compile Include="Migrations\202210172104433_AgePropertyAdded.designer.cs">
+      <DependentUpon>202210172104433_AgePropertyAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210172106481_AgePropertyAddedToPetModel.cs" />
+    <Compile Include="Migrations\202210172106481_AgePropertyAddedToPetModel.designer.cs">
+      <DependentUpon>202210172106481_AgePropertyAddedToPetModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210172117015_PetAgeModelPropertyAdded.cs" />
+    <Compile Include="Migrations\202210172117015_PetAgeModelPropertyAdded.designer.cs">
+      <DependentUpon>202210172117015_PetAgeModelPropertyAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210172142159_AgePropertyAddedToPetModel1.cs" />
+    <Compile Include="Migrations\202210172142159_AgePropertyAddedToPetModel1.designer.cs">
+      <DependentUpon>202210172142159_AgePropertyAddedToPetModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210172143400_RemovingAge.cs" />
+    <Compile Include="Migrations\202210172143400_RemovingAge.designer.cs">
+      <DependentUpon>202210172143400_RemovingAge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210172144520_AddingAgeToPetModel.cs" />
+    <Compile Include="Migrations\202210172144520_AddingAgeToPetModel.designer.cs">
+      <DependentUpon>202210172144520_AddingAgeToPetModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PetService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +305,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209280127153_Initial Migrations.resx">
       <DependentUpon>202209280127153_Initial Migrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210172104433_AgePropertyAdded.resx">
+      <DependentUpon>202210172104433_AgePropertyAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210172106481_AgePropertyAddedToPetModel.resx">
+      <DependentUpon>202210172106481_AgePropertyAddedToPetModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210172117015_PetAgeModelPropertyAdded.resx">
+      <DependentUpon>202210172117015_PetAgeModelPropertyAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210172142159_AgePropertyAddedToPetModel1.resx">
+      <DependentUpon>202210172142159_AgePropertyAddedToPetModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210172143400_RemovingAge.resx">
+      <DependentUpon>202210172143400_RemovingAge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210172144520_AddingAgeToPetModel.resx">
+      <DependentUpon>202210172144520_AddingAgeToPetModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

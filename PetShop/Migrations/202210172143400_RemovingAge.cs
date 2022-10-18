@@ -1,0 +1,18 @@
+﻿namespace PetShop.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class RemovingAge : DbMigration
+    {
+        public override void Up()
+        {
+            DropColumn("dbo.Pets", "Age");
+        }
+        
+        public override void Down()
+        {
+            AddColumn("dbo.Pets", "Age", c => c.Int(nullable: false));
+        }
+    }
+}

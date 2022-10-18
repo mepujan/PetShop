@@ -24,28 +24,31 @@ namespace PetShop.Data
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
             ApplicationUser admin = new ApplicationUser();
-            admin.Email = "mepujan10@gmail.com";
+            admin.Email = "test@test.com";
             admin.DateofBirth = DateTime.Parse("2000-01-01");
-            admin.UserName = "mepujan10@gmail.com";
+            admin.UserName = "test@test.com";
             if (userManager.FindByEmail(admin.Email) == null)
             {
-                var result = userManager.Create(admin, "Password123");
+                var result = userManager.Create(admin, "Testing1234");
                 if (result.Succeeded)
                 {
                     userManager.AddToRole(admin.Id, "Admin");
                 }
             }
             context.Pets.Add(
-                new Pet { Name = "Leo", IsMale = true, Breed = "Husky"}
+                new Pet { Name = "Leo", IsMale = true, Breed = "Husky",Age = 3}
                 );
             context.Pets.Add(
-                new Pet { Name = "Fluffy", IsMale = true, Breed = "Husky"}
+                new Pet { Name = "Fluffy", IsMale = true, Breed = "Husky", Age = 4 }
                 );
             context.Pets.Add(
-                new Pet { Name = "Bluffy", IsMale = true, Breed = "Husky"}
+                new Pet { Name = "Bluffy", IsMale = true, Breed = "Husky", Age = 5 }
                 );
             context.Pets.Add(
-                new Pet { Name = "Kitty", IsMale = true, Breed = "Husky"}
+                new Pet { Name = "Kitty", IsMale = true, Breed = "Husky", Age = 2}
+                );
+            context.Pets.Add(
+                new Pet { Name = "Kit", IsMale = true, Breed = "Husky",Owner = admin, Age = 5}
                 );
             base.Seed(context);
         }

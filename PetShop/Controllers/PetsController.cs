@@ -68,7 +68,7 @@ namespace PetShop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
        [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "Id,Name,Breed,IsMale")] Pet pet)
+        public ActionResult Create([Bind(Include = "Id,Name,Breed,Age,IsMale")] Pet pet)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +102,7 @@ namespace PetShop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "Id,Name,Breed,IsMale")] Pet pet)
+        public ActionResult Edit([Bind(Include = "Id,Name,Breed,Age,IsMale")] Pet pet)
         {
             if (ModelState.IsValid)
             {
