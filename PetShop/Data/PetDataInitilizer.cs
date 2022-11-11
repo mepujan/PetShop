@@ -36,19 +36,19 @@ namespace PetShop.Data
                 }
             }
             context.Pets.Add(
-                new Pet { Name = "Leo", IsMale = true, Breed = "Husky",Age = 3}
+                new Pet { Name = "Leo", IsMale = true, Breed = "Husky",Age = 3,IsFixed = true}
                 );
             context.Pets.Add(
-                new Pet { Name = "Fluffy", IsMale = true, Breed = "Husky", Age = 4 }
+                new Pet { Name = "Fluffy", IsMale = true, Breed = "Husky", Age = 4 , IsFixed = false}
                 );
             context.Pets.Add(
-                new Pet { Name = "Bluffy", IsMale = true, Breed = "Husky", Age = 5 }
+                new Pet { Name = "Bluffy", IsMale = false, Breed = "German Shepard", Age = 5, IsFixed = false }
                 );
             context.Pets.Add(
-                new Pet { Name = "Kitty", IsMale = true, Breed = "Husky", Age = 2}
+                new Pet { Name = "Kitty", IsMale = true, Breed = "German Shepard", Age = 2, IsFixed = true }
                 );
             context.Pets.Add(
-                new Pet { Name = "Kit", IsMale = true, Breed = "Husky",Owner = admin, Age = 5}
+                new Pet { Name = "Kit", IsMale = true, Breed = "Husky",Owner = admin, Age = 5,IsFixed= false}
                 );
             base.Seed(context);
         }

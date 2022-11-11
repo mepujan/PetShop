@@ -10,10 +10,12 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI;
 using PetShop.Models;
+using PetShop.Models.ViewModel;
+using PetShop.Services;
 
 namespace PetShop.Controllers
 {
-  
+
     public class PetsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -32,11 +34,24 @@ namespace PetShop.Controllers
             return calculatedAge;
         }
 
+        public ActionResult GetPetsByBreed(string breed)
+        {
+            /**
+             * accepts string breed as an argument and 
+             * return the partial view along with the list pets filtered by breed
+            */
+            var petService = new PetService();
+            return PartialView("_PetListPartial", petService.GetPetsByBreed(breed));
+        }
+
         // GET: Pets
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(db.Pets.Where(p => p.Owner == null).ToList());
+            //return View(db.Pets.Where(p => p.Owner == null).ToList());
+
+            List<string> model = db.Pets.Select(pet => pet.Breed).Distinct().ToList();
+            return View(model);
         }
 
         // GET: Pets/Details/5
@@ -59,7 +74,12 @@ namespace PetShop.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            return View();
+            var model = new CreatePetViewModel
+            {
+                DropDownBreed = db.Pets.
+                                  Select(pet => new SelectListItem { Text = pet.Breed, Value = pet.Breed }).Distinct().ToList()
+            };
+            return View(model);
         }
 
         // POST: Pets/Create
@@ -67,8 +87,8 @@ namespace PetShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-       [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "Id,Name,Breed,Age,IsMale")] Pet pet)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create([Bind(Include = "Id,Name,Breed,Age,IsMale,IsFixed")] Pet pet)
         {
             if (ModelState.IsValid)
             {
@@ -93,6 +113,17 @@ namespace PetShop.Controllers
             {
                 return HttpNotFound();
             }
+            var model = new EditPetViewModel();
+            model.DropDownBreed = db.Pets.
+                                Select(p => new SelectListItem { Text = p.Breed, Value = p.Breed })
+                                              .Distinct().ToList();
+            model.Id = pet.Id;
+            model.Name = pet.Name;
+            model.Breed = pet.Breed;
+            model.Age = pet.Age;
+            model.IsMale = pet.IsMale;
+            model.IsFixed = pet.IsFixed;
+            return View(model);
             return View(pet);
         }
 
@@ -102,7 +133,7 @@ namespace PetShop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "Id,Name,Breed,Age,IsMale")] Pet pet)
+        public ActionResult Edit([Bind(Include = "Id,Name,Breed,Age,IsMale,IsFixed")] Pet pet)
         {
             if (ModelState.IsValid)
             {
@@ -164,7 +195,7 @@ namespace PetShop.Controllers
         [Authorize]
         public ActionResult Adopt(int? id)
         {
-            if(id == null)
+            if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var pet = db.Pets.Find(id);
             if (pet == null)
@@ -186,7 +217,7 @@ namespace PetShop.Controllers
 
             var minAge = 18;
             var claimUser = HttpContext.User as ClaimsPrincipal;
-            
+
             var dateOfBirth = Convert.ToDateTime(claimUser.FindFirst(c => c.Type == ClaimTypes.DateOfBirth).Value);
             if (CalculateAge(dateOfBirth) < minAge)
             {

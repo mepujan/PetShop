@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PetShop.Models.Pet>
+﻿@model IEnumerable<string>
 
 @{
     ViewBag.Title = "Index";
@@ -9,53 +9,11 @@
 <p>
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
-           @Html.ActionLink("Create New", "Create") 
-     }
+        @Html.ActionLink("Create New", "Create")
+    }
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Breed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsMale)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Breed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsMale)
-        </td>
-        @if (User.Identity.IsAuthenticated)
-        {
-        <td>
-           @if (User.IsInRole("Admin")) 
-            {
-                @Html.ActionLink("Edit |", "Edit", new { id = item.Id }) 
-                @Html.ActionLink("Details |", "Details", new { id = item.Id }) 
-                @Html.ActionLink("Delete |", "Delete", new { id = item.Id }) 
-            }
-            @Html.ActionLink("Adopt", "Adopt", new { id = item.Id })
-        </td>
-        }
-    </tr>
+@foreach(var item in Model){
+    <p>Breed: @item</p>
+    @Html.Action("GetPetsByBreed",new {breed = item})
 }
-
-</table>

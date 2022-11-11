@@ -1,5 +1,7 @@
 ﻿using PetShop.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PetShop.Services
 {
@@ -28,6 +30,20 @@ namespace PetShop.Services
             return true;
         }
 
+        public IEnumerable<Pet> GetAllPets()
+        {
+            return _context.Pets.ToList();
+        }
+
+        public Pet GetPetById(int id)
+        {
+            return _context.Pets.Where(pet => pet.Id == id).First();
+        }
+
+        public IEnumerable<Pet> GetPetsByBreed(string breed)
+        {
+            return _context.Pets.Where(pet => pet.Breed.Equals(breed)).ToList();
+        }
 
     }
 }

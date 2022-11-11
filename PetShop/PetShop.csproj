@@ -210,11 +210,17 @@
     <Compile Include="Migrations\202210172144520_AddingAgeToPetModel.designer.cs">
       <DependentUpon>202210172144520_AddingAgeToPetModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202211112045301_added_IsFixed_Property.cs" />
+    <Compile Include="Migrations\202211112045301_added_IsFixed_Property.designer.cs">
+      <DependentUpon>202211112045301_added_IsFixed_Property.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pet.cs" />
+    <Compile Include="Models\ViewModel\CreatePetViewModel.cs" />
+    <Compile Include="Models\ViewModel\EditPetViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PetService.cs" />
     <Compile Include="Startup.cs" />
@@ -282,6 +288,7 @@
     <Content Include="Views\Pets\Index.cshtml" />
     <Content Include="Views\Pets\MyPets.cshtml" />
     <Content Include="Views\Pets\Adopt.cshtml" />
+    <Content Include="Views\Pets\_PetListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -323,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210172144520_AddingAgeToPetModel.resx">
       <DependentUpon>202210172144520_AddingAgeToPetModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211112045301_added_IsFixed_Property.resx">
+      <DependentUpon>202211112045301_added_IsFixed_Property.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

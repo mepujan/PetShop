@@ -15,6 +15,7 @@ namespace PetShop.Models
         [NonNegative]
         public virtual int Age { get; set; }
         public virtual bool IsMale { get; set; }
+        public virtual bool IsFixed { get; set; }   
         public virtual ApplicationUser Owner { get; set; }
     }
 }
