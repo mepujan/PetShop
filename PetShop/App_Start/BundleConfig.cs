@@ -25,6 +25,10 @@ namespace PetShop
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // adding petbundles
+            bundles.Add(new ScriptBundle("~/bundles/petsbundles").Include(
+                    "~/Scripts/Pets/PetCallbacks.js"));
         }
     }
 }

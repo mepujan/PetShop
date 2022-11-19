@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI;
+using PetShop.Interface;
 using PetShop.Models;
 using PetShop.Models.ViewModel;
 using PetShop.Services;
@@ -18,7 +19,16 @@ namespace PetShop.Controllers
 
     public class PetsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+        private IPetService petService;
+
+        public PetsController() { }
+
+        public PetsController(ApplicationDbContext context, IPetService service)
+        {
+            this.db = context;
+            this.petService = service;
+        }
 
 
         /**
@@ -40,7 +50,7 @@ namespace PetShop.Controllers
              * accepts string breed as an argument and 
              * return the partial view along with the list pets filtered by breed
             */
-            var petService = new PetService();
+            //var petService = new PetService();
             return PartialView("_PetListPartial", petService.GetPetsByBreed(breed));
         }
 
@@ -94,10 +104,10 @@ namespace PetShop.Controllers
             {
                 db.Pets.Add(pet);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new {text = "Success"},JsonRequestBehavior.AllowGet);
             }
 
-            return View(pet);
+            return Json(new { text = "Failed" }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Pets/Edit/5
@@ -124,7 +134,6 @@ namespace PetShop.Controllers
             model.IsMale = pet.IsMale;
             model.IsFixed = pet.IsFixed;
             return View(model);
-            return View(pet);
         }
 
         // POST: Pets/Edit/5
@@ -139,9 +148,9 @@ namespace PetShop.Controllers
             {
                 db.Entry(pet).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { text = "Success" }, JsonRequestBehavior.AllowGet); 
             }
-            return View(pet);
+            return Json(new { text = "Failed" }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Pets/Delete/5

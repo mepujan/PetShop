@@ -1,16 +1,20 @@
-﻿using PetShop.Models;
+﻿using PetShop.Interface;
+using PetShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace PetShop.Services
 {
-    public class PetService
+    public class PetService : IPetService
     {
         private ApplicationDbContext _context;
         public PetService() {
             _context = new ApplicationDbContext();
         }
+
+
 
         public PetService(ApplicationDbContext context)
         {
